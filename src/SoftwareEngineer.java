@@ -15,13 +15,13 @@ public class SoftwareEngineer extends TechnicalEmployee {
     }
 
     public int getSuccessfulCheckIns() {
-        return super.successfulCheckIns;
+        return super.getSuccessfulCheckIns();
     }
 
     public boolean checkInCode() {
         TechnicalLead manager = (TechnicalLead) getManager();
         if (manager.approveCheckIn(this)) {
-            successfulCheckIns ++;
+            super.setSuccessfulCheckIns(super.getSuccessfulCheckIns() + 1);
             return true;
         }
         return false;
