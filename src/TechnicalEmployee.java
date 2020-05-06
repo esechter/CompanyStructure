@@ -4,6 +4,7 @@ public abstract class TechnicalEmployee extends Employee {
 
     public TechnicalEmployee(String name) {
         super(name, DEFAULT_SALARY);
+        successfulCheckIns = 0;
     }
 
     public TechnicalEmployee(String name, double salary) {

@@ -8,6 +8,7 @@ public class BusinessLead extends BusinessEmployee implements Manager {
     public BusinessLead(String name) {
         super(name, DEFAULT_SALARY * 2);
         setHeadcount(DEFAULT_HEADCOUNT);
+        reports = new ArrayList<>();
     }
 
     @Override
@@ -26,7 +27,7 @@ public class BusinessLead extends BusinessEmployee implements Manager {
 
     @Override
     public boolean hasHeadCount() {
-        return headCount < reports.size();
+        return reports.size() < headCount;
     }
 
     public boolean addReport(Accountant e, TechnicalLead supportTeam) {

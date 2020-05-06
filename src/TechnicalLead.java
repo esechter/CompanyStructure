@@ -2,16 +2,22 @@ import java.util.ArrayList;
 
 public class TechnicalLead extends TechnicalEmployee implements Manager{
     private static final int DEFAULT_HEADCOUNT = 4;
-    int headCount;
+    private int headCount;
+    BusinessLead businessLead;
     ArrayList<SoftwareEngineer> reports;
 
     public TechnicalLead(String name) {
         super(name, DEFAULT_SALARY * 1.3);
         setHeadcount(DEFAULT_HEADCOUNT);
+        reports = new ArrayList<>();
+    }
+
+    public int getEmployeeCount() {
+        return reports.size();
     }
 
     public boolean hasHeadCount() {
-        return headCount < reports.size();
+        return  reports.size() < headCount;
     }
 
     public boolean addReport(SoftwareEngineer e) {
@@ -28,7 +34,7 @@ public class TechnicalLead extends TechnicalEmployee implements Manager{
     //TODO - implement once business lead is done
     @Override
     public boolean requestbonus(Employee e, double bonus) {
-
+        businessLead.approveBonus(e, bonus);
         return false;
     }
 
@@ -39,12 +45,12 @@ public class TechnicalLead extends TechnicalEmployee implements Manager{
 
     public String getTeamStatus() {
         if (reports.isEmpty()) {
-            return employeeStatus + " and no direct reports yet";
+            return super.employeeStatus() + " and no direct reports yet";
         }
         StringBuilder sb = new StringBuilder();
-        sb.append(employeeStatus + "and is managing: \n");
+        sb.append(super.employeeStatus() + " and is managing: \n");
         for (SoftwareEngineer e : reports) {
-            sb.append(e.employeeStatus + "\n");
+            sb.append(e.employeeStatus() + "\n");
         }
         return sb.toString();
     }

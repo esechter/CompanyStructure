@@ -4,7 +4,6 @@ public abstract class Employee {
     double baseSalary;
     int employeeID;
     Employee manager;
-    String employeeStatus;
     boolean isManager;
 
     public Employee (String name, double baseSalary) {

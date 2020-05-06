@@ -14,7 +14,7 @@ public class Accountant extends BusinessEmployee {
 
     public void supportTeam(TechnicalLead lead) {
         teamSupported = lead;
-        setBonusBudget(lead.headCount * TechnicalEmployee.DEFAULT_SALARY * 1.1);
+        setBonusBudget(lead.getEmployeeCount() * TechnicalEmployee.DEFAULT_SALARY * 1.1);
     }
 
     public boolean approveBonus(double bonus) {
@@ -23,6 +23,6 @@ public class Accountant extends BusinessEmployee {
 
     @Override
     public String employeeStatus() {
-        return super.employeeStatus + " is supporting " + teamSupported.getName();
+        return super.employeeStatus() + " is supporting " + teamSupported.getName();
     }
 }
