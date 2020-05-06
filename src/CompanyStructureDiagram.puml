@@ -1,0 +1,92 @@
+@startuml
+
+abstract class Employee {
+	- name : String
+    - baseSalary : double
+    - employeeID : int
+    - manager : Employee
+    - employeeStatus : String
+
+	+ Employee(name : String, baseSalary : double)
+    + getBaseSalary() : double
+    + getName() : String
+    + getEmployeeID() : int
+    + getManager() : Employee
+    + equals() : boolean
+    + toString() : String <<overrides>>
+    + employeeStatus() : String
+}
+
+class TechnicalEmployee<extends Employee> {
+	- successfulCheckIns : int
+	+ TechnicalEmployee(name : String)
+    + toString() : String <<overrides>>
+    + getSuccessfulCheckIns() : int
+}
+
+class BusinessEmployee<extends Employee> {
+	- bonusBudget : double
+	+ BusinessEmployee(name : String)
+    + getBonusBudget() : double
+    + employeeStatus() : String <<overrides>>
+}
+
+class SoftwareEngineer<extends TechnicalEmployee> {
+	- codeAccess : boolean
+
+    + SoftwareEngineer(name : String)
+    + getCodeAccess() : boolean
+    + setCodeAccess() : boolean
+    + checkInCode() : boolean
+}
+
+class Accountant<extends BusinessEmployee> {
+	- teamSupported : TechnicalLead
+	+ Accountant(name : String)
+    + getTeamSupported() : TechnicalLead
+    + supportTeam(lead : TechnicalLead) : void
+    + approveBonus(bonus : double) : boolean
+    + employeeStatus() : String <<overrides>>
+}
+
+class TechnicalLead<extends TechnicalEmployee> {
+	- isManager : boolean
+    - headCount : int
+    - reports : SoftwareEngineer[]
+    + TechnicalLead(name : String)
+    + hasHeadCount() : boolean
+    + addReport(e : SoftwareEngineer) : boolean
+    + approveCheckIn(e : SoftwareEngineer) : boolean
+    + requestBonus(e : Employee, bonus : double) : boolean
+    + getTeamStatus() : String
+}
+
+class BusinessLead<extends BusinessEmployee> {
+	- isManager : boolean
+    - headCount : int
+    - reports : Accountant[]
+	+ BusinessLead(name : String)
+    + hasHeadCount() : boolean
+    + addReport(e : Accountant, supportTeam : TechnicalLead) : boolean
+    + requestBonus(e : Employee, bonus : double) : boolean
+    + approveBonus(e : Employee, bonus : double) : boolean
+}
+
+interface Manager {
+	+ addReport() : boolean
+    + requestBonus() : boolean
+
+}
+Employee <|-left- TechnicalEmployee
+Employee <|-right- BusinessEmployee
+TechnicalEmployee <|-down- SoftwareEngineer
+TechnicalEmployee <|-down- TechnicalLead
+BusinessEmployee <|-- Accountant
+BusinessEmployee <|-- BusinessLead
+Manager <|-right- BusinessLead
+Manager <|-left- TechnicalLead
+Accountant "1" o-- "1" TechnicalLead
+TechnicalLead "1" o-down- "1..*" SoftwareEngineer
+BusinessLead "1" o-- "1..*" Accountant
+
+@enduml
