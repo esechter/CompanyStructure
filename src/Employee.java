@@ -1,4 +1,5 @@
 public abstract class Employee {
+    private static int counterForId;
     String name;
     double baseSalary;
     int employeeID;
@@ -9,6 +10,8 @@ public abstract class Employee {
     public Employee (String name, double baseSalary) {
         this.name = name;
         this.baseSalary = baseSalary;
+        this.employeeID = counterForId;
+        counterForId++;
     }
 
     public String getName() {

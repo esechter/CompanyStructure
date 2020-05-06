@@ -1,4 +1,3 @@
 public interface Manager {
-    public boolean addReport();
-    public boolean requestbonus();
+    public boolean requestbonus(Employee e, double bonus);
 }
